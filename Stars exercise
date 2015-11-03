@@ -1,0 +1,14 @@
+#include <iostream>
+using namespace std;
+int triangles (int n)
+{
+    int i;
+    for (i=0; i<n; i++){
+        cout<<"T"<<endl;
+    }
+}
+int main()
+{
+    triangles(6);
+    return 0;
+}
