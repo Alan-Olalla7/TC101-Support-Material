@@ -1,0 +1,46 @@
+void halfIm (string s){
+  Image image2;
+  image2.read(s);
+
+  int l = image2.rows();
+  int a = image2.columns();
+  int l2 = l/2;
+  int a2 = a/2;
+  Image image3( Geometry(a2, l2), Color(MaxRGB, MaxRGB, MaxRGB, 0));
+  Color image_array [l] [a];
+  Color image_array2 [l2] [a2];
+  Color pixel1, pixel2, pixel3, pixel4, pixel5;
+  int red,blue,green;
+  Color newRGB, newRGB2;
+
+  for (int i=0; i<l; i++){
+        for (int j= 0; j<h; j++){
+              pixel1 = image2.pixelColor(j,i);
+              image_array [i][j] = pixel1;
+        }
+  }
+
+  for (int i=0; i<l; i=i+2){
+       for (int j=0; j<a; j=j+2){
+       	     int y = i/2;
+       	     int t = j/2;
+             pixel2 = image_array [i] [j];
+             pixel3 = image_array [i+1] [j];
+             pixel4 = image_array [i] [j+1];
+             pixel5 = image_array [i+1] [j+1];
+             red = (pixel2.redQuantum() + pixel3.redQuantum() + pixel4.redQuantum() + pixel5.redQuantum())/4;
+             blue = (pixel2.blueQuantum() + pixel3.blueQuantum() + pixel4.blueQuantum() + pixel5.blueQuantum())/4;
+             green = (pixel2.greenQuantum() + pixel3.greenQuantum() + pixel4.greenQuantum() + pixel5.greenQuantum())/4;
+             newRGB.redQuantum(red);
+             newRGB.greenQuantum(green);
+             newRGB.blueQuantum(blue);
+             image_array2 [y] [t] = newRGB;
+       }
+  }
+
+  for (int i=0; i<l2; i++){
+       for (int j=0; j<a2; j++){
+             newRGB2 =image_array2 [i] [j];
+             image3.pixelColor(j, i, newRGB2);
+       }
+  }
